@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
 import com.example.trelloclone.databinding.ActivitySplashBinding
+import com.example.trelloclone.firebase.FirebaseStore
 
 class SplashActivity : AppCompatActivity() {
     var binding: ActivitySplashBinding? = null
@@ -25,8 +26,13 @@ class SplashActivity : AppCompatActivity() {
         binding?.tvAppName?.typeface = typeface
 
         Handler().postDelayed({
-            startActivity(Intent(this, IntroActivity::class.java))
-            finish()
+            var currentUserId = FirebaseStore().getCurrentUserId()
+            if (currentUserId.isNotEmpty()) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(this, IntroActivity::class.java))
+            }
         }, 2500)
     }
 }

@@ -8,6 +8,8 @@ import android.view.WindowManager
 import android.widget.Toast
 import com.example.trelloclone.R
 import com.example.trelloclone.databinding.ActivitySignInBinding
+import com.example.trelloclone.firebase.FirebaseStore
+import com.example.trelloclone.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -38,7 +40,6 @@ class SignInActivity : BaseActivity() {
     }
 
     private fun signInRegisteredUser() {
-        // Here we get the text from editText and trim the space
         val email: String = binding?.etEmail?.text.toString().trim { it <= ' ' }
         val password: String = binding?.etPassword?.text.toString().trim { it <= ' ' }
 
@@ -47,16 +48,10 @@ class SignInActivity : BaseActivity() {
 
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
-                    hideProgressDialog()
                     if (task.isSuccessful) {
-                        Toast.makeText(
-                            this@SignInActivity,
-                            "You have successfully signed in.",
-                            Toast.LENGTH_LONG
-                        ).show()
-
-                        startActivity(Intent(this, MainActivity::class.java))
+                        FirebaseStore().signInUser(this)
                     } else {
+                        hideProgressDialog()
                         Toast.makeText(
                             this@SignInActivity,
                             task.exception!!.message,
@@ -66,6 +61,18 @@ class SignInActivity : BaseActivity() {
                 }
         }
     }
+
+    fun signInSuccess(user: User) {
+        hideProgressDialog()
+        Toast.makeText(
+            this@SignInActivity,
+            "You have successfully signed in.",
+            Toast.LENGTH_LONG
+        ).show()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
+
 
     private fun validateForm(email: String, password: String): Boolean {
         return if (TextUtils.isEmpty(email)) {
