@@ -22,6 +22,14 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/activity_main_content" />
+    <include android:id="@+id/main_content" layout="@layout/activity_main_content" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_create_board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:backgroundTint="@color/purple_200"
+        app:srcCompat="@drawable/ic_vector_add_24dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
