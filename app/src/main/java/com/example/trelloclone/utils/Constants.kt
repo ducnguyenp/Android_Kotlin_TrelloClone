@@ -20,6 +20,8 @@ object Constants {
     const val ID: String = "id"
     const val EMAIL: String = "email"
     const val ASSIGNED_TO: String = "assignedTo"
+    const val TASK_LIST_POSITION: String = "taskListPosition"
+    const val CARD_POSITION: String = "cardPosition"
 
     const val PICK_IMAGE_REQUEST_CODE: Int = 2
     const val READ_STORAGE_PERMISSION_CODE: Int = 1

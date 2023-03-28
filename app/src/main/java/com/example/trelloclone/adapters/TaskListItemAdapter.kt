@@ -114,18 +114,28 @@ class TaskListItemAdapter(private val context: Context, private var list: ArrayL
                 }
             }
             onAddCard(holder, position)
-            onShowCardList(holder, model.cardList)
+            onShowCardList(holder, model.cardList, position)
         }
     }
 
-    private fun onShowCardList(holder: RecyclerView.ViewHolder, card: ArrayList<Card>) {
+    private fun onShowCardList(
+        holder: RecyclerView.ViewHolder,
+        card: ArrayList<Card>,
+        taskPosition: Int
+    ) {
         holder.itemView.findViewById<RecyclerView>(R.id.rv_card_list).layoutManager =
             LinearLayoutManager(context)
         holder.itemView.findViewById<RecyclerView>(R.id.rv_card_list).setHasFixedSize(true)
 
         var adapter = CardListItemsAdapter(context, card)
         holder.itemView.findViewById<RecyclerView>(R.id.rv_card_list).adapter = adapter
-
+        adapter.setOnClickListener(object : CardListItemsAdapter.OnClickListener {
+            override fun onClick(cardPosition: Int) {
+                if (context is TaskListActivity) {
+                    context.cardDetail(taskPosition, cardPosition)
+                }
+            }
+        })
     }
 
     private fun onAddCard(holder: RecyclerView.ViewHolder, position: Int) {

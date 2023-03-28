@@ -22,6 +22,7 @@ class TaskListActivity : BaseActivity() {
     var documentId: String = ""
     companion object {
         const val MEMBER_REQUEST_CODE = 13
+        const val CARD_DETAIL_REQUEST_CODE = 14
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,36 +31,6 @@ class TaskListActivity : BaseActivity() {
         setContentView(binding?.root)
         getIntentFromActivity()
         Log.i("Life circle", "OnCreate")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.i("Life circle", "OnStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.i("Life circle", "OnResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.i("Life circle", "OnPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.i("Life circle", "OnStop")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.i("Life circle", "OnRestart")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.i("Life circle", "OnDestroy")
     }
 
     private fun getIntentFromActivity() {
@@ -165,5 +136,17 @@ class TaskListActivity : BaseActivity() {
             showProgressDialog(resources.getString(R.string.please_wait))
             FirebaseStore().getBoardDetail(this, documentId)
         }
+        if (resultCode == Activity.RESULT_OK && requestCode == CARD_DETAIL_REQUEST_CODE) {
+            showProgressDialog(resources.getString(R.string.please_wait))
+            FirebaseStore().getBoardDetail(this, documentId)
+        }
+    }
+
+    fun cardDetail(taskListPosition: Int, cardPosition: Int) {
+        var intent = Intent(this, CardDetailActivity::class.java)
+        intent.putExtra(Constants.CARD_POSITION, cardPosition)
+        intent.putExtra(Constants.TASK_LIST_POSITION, taskListPosition)
+        intent.putExtra(Constants.BOARD_DETAIL, mBoardDetail)
+        startActivityForResult(intent, CARD_DETAIL_REQUEST_CODE)
     }
 }

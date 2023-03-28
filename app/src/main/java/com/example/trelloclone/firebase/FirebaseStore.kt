@@ -137,14 +137,20 @@ class FirebaseStore {
             }
     }
 
-    fun addUpdateTaskList(activity: TaskListActivity, board: Board) {
+    fun addUpdateTaskList(activity: Activity, board: Board) {
         val taskListHashMap = HashMap<String, Any>()
         taskListHashMap[Constants.TASK_LIST] = board.taskList
         mFireStore.collection(Constants.BOARDS)
             .document(board.documentId).update(taskListHashMap)
             .addOnSuccessListener {
-                Toast.makeText(activity, "Update task list success", Toast.LENGTH_LONG).show()
-                activity.addUpdateTasklistSuccess()
+                if (activity is TaskListActivity) {
+                    Toast.makeText(activity, "Update task list success", Toast.LENGTH_LONG).show()
+                    activity.addUpdateTasklistSuccess()
+                }
+                if (activity is CardDetailActivity) {
+                    Toast.makeText(activity, "Delete card success", Toast.LENGTH_LONG).show()
+                    activity.addUpdateTasklistSuccess()
+                }
             }
             .addOnFailureListener {
                 Toast.makeText(activity, "Update task list failed", Toast.LENGTH_LONG).show()
