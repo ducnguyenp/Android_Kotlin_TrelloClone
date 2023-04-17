@@ -20,10 +20,10 @@ import com.google.firebase.storage.StorageReference
 import java.io.IOException
 
 class CreateBoardActivity : BaseActivity() {
-    var binding: ActivityCreateBoardBinding? = null
     private var mSelectedImageUri: Uri? = null
     private var mBoardImageURL: String = ""
     private lateinit var mUserName: String
+    var binding: ActivityCreateBoardBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

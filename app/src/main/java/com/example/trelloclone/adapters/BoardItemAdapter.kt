@@ -17,7 +17,8 @@ open class BoardItemAdapter(private val context: Context, private var list: Arra
     private var onClickListener: OnClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_board, parent, false))
+        return MyViewHolder(LayoutInflater.from(context)
+            .inflate(R.layout.item_board, parent, false))
     }
 
 

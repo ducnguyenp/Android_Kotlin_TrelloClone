@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><!--TODO (Step 3: Design the CardDetailsActivity as per requirement.)-->
-<!--START-->
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".activities.CardDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -86,7 +86,7 @@
                     android:layout_marginTop="@dimen/card_details_value_marginTop"
                     android:padding="@dimen/card_details_value_padding"
                     android:text="@string/select_color"
-                    android:textColor="@color/light_gray" />
+                    android:textColor="@color/divider_color" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -103,7 +103,17 @@
                     android:layout_marginTop="@dimen/card_details_value_marginTop"
                     android:padding="@dimen/card_details_value_padding"
                     android:text="@string/select_members"
-                    android:textColor="@color/light_gray" />
+                    android:textColor="@color/divider_color"
+                    android:visibility="visible"
+                    tools:visibility="gone" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_selected_members_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/card_details_value_marginTop"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -120,7 +130,7 @@
                     android:layout_marginTop="@dimen/card_details_value_marginTop"
                     android:padding="@dimen/card_details_value_padding"
                     android:text="@string/select_due_date"
-                    android:textColor="@color/light_gray" />
+                    android:textColor="@color/divider_color" />
 
                 <Button
                     android:id="@+id/btn_update_card_details"
@@ -139,4 +149,4 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
-</LinearLayout><!--END-->
+</LinearLayout>

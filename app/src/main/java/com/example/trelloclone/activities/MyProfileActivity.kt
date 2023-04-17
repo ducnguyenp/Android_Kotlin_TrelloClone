@@ -32,36 +32,29 @@ class MyProfileActivity : BaseActivity() {
         FirebaseStore().signInUser(this)
         setUpNavigationBar()
 
-        binding?.ivUserImage?.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                Constants.showImageChoose(this)
-            } else {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                    Constants.READ_STORAGE_PERMISSION_CODE
-                )
-            }
-        }
-        binding?.btnUpdate?.setOnClickListener {
-            if (mSlectedImageUri != null) {
-                uploadUserImage()
-            } else {
-                showProgressDialog(resources.getString(R.string.please_wait))
-                updateUserProfile()
-            }
+    binding?.ivUserImage?.setOnClickListener {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            Constants.showImageChoose(this)
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                Constants.READ_STORAGE_PERMISSION_CODE
+            )
         }
     }
+    binding?.btnUpdate?.setOnClickListener {
+        if (mSlectedImageUri != null) {
+            uploadUserImage()
+        } else {
+            showProgressDialog(resources.getString(R.string.please_wait))
+            updateUserProfile()
+        }
+    }
+    }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int,permissions: Array<out String>,grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == Constants.READ_STORAGE_PERMISSION_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

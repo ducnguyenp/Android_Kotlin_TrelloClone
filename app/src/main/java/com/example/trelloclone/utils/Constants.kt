@@ -1,11 +1,14 @@
 package com.example.trelloclone.utils
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
 import android.webkit.MimeTypeMap
 import com.example.trelloclone.activities.MyProfileActivity
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Constants {
     const val USERS: String = "users"
@@ -22,6 +25,9 @@ object Constants {
     const val ASSIGNED_TO: String = "assignedTo"
     const val TASK_LIST_POSITION: String = "taskListPosition"
     const val CARD_POSITION: String = "cardPosition"
+    const val BOARD_MEMBER_LIST: String = "boardMemberList"
+    const val UN_SELECT: String = "unSelect"
+    const val SELECT: String = "select"
 
     const val PICK_IMAGE_REQUEST_CODE: Int = 2
     const val READ_STORAGE_PERMISSION_CODE: Int = 1

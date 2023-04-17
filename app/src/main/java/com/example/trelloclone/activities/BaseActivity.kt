@@ -43,12 +43,7 @@ open class BaseActivity : AppCompatActivity() {
         }
 
         this.doubleBackToExitPressedOnce = true
-        Toast.makeText(
-            this,
-            resources.getString(R.string.please_click_back_again_to_exit),
-            Toast.LENGTH_SHORT
-        ).show()
-
+        Toast.makeText(this, resources.getString(R.string.please_click_back_again_to_exit),Toast.LENGTH_SHORT).show()
         Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
 
@@ -66,15 +61,10 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun showSuccessSnackBar(message: String) {
-        val snackBar =
-            Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
+        val snackBar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
         val snackBarView = snackBar.view
-        snackBarView.setBackgroundColor(
-            ContextCompat.getColor(
-                this@BaseActivity,
-                R.color.snackbar_success_color
-            )
-        )
+        snackBarView.setBackgroundColor(ContextCompat
+            .getColor(this@BaseActivity, R.color.snackbar_success_color))
         snackBar.show()
     }
 }
